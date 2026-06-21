@@ -1,0 +1,94 @@
+aid: numeral
+name: Numeral
+review:
+  question: Does Numeral expose a documented public webhooks API for subscribing to events?
+  answer: false
+  date: '2026-06-21'
+  reviewer: API Evangelist
+  disambiguation: |
+    This catalog covers Numeral / Numeral HQ (numeral.com, numeralhq.com,
+    docs.numeral.com), the AI-native sales-tax compliance and automation
+    platform for ecommerce and SaaS. It is NOT the same company as Numeral
+    (numeral.io, docs.numeral.io) — an unrelated bank-payments / payment-
+    operations platform now part of Mambu. The two share a name only; their
+    APIs, domains, and base URLs differ (api.numeralhq.com vs the numeral.io
+    payments API). The "List transactions" and payments endpoints found under
+    docs.numeral.io belong to the payments company and are out of scope here.
+findings:
+  summary: |
+    Numeral's public REST API reference (docs.numeral.com) documents tax
+    calculations, transactions, refunds, products, and customers under base
+    URL https://api.numeralhq.com with Bearer API-key authentication and an
+    X-API-Version header. It does NOT document a public webhook subscription
+    endpoint (no create/list/delete webhook-endpoint resource) in the API
+    reference. Numeral surfaces compliance lifecycle events — filing,
+    registration, and nexus alerts (e.g., state-crossing alerts) — through the
+    platform/dashboard and integrations rather than a self-serve, documented
+    public webhooks REST API. Registrations, nexus monitoring, filing, and
+    remittance are likewise delivered as managed platform services on top of
+    API-captured transaction data, not as self-serve public REST endpoints.
+  documentedRestEndpoints:
+    - POST   https://api.numeralhq.com/tax/calculations
+    - POST   https://api.numeralhq.com/tax/platform_calculations
+    - POST   https://api.numeralhq.com/tax/transactions
+    - GET    https://api.numeralhq.com/tax/transactions/{transaction_id}
+    - DELETE https://api.numeralhq.com/tax/transactions/{transaction_id}
+    - GET    https://api.numeralhq.com/tax/transactions/{transaction_id}/refunds
+    - POST   https://api.numeralhq.com/tax/refunds
+    - POST   https://api.numeralhq.com/tax/refund_reversals
+    - POST   https://api.numeralhq.com/tax/products
+    - GET    https://api.numeralhq.com/tax/products
+    - GET    https://api.numeralhq.com/tax/products/{reference_product_id}
+    - DELETE https://api.numeralhq.com/tax/products/{reference_product_id}
+    - POST   https://api.numeralhq.com/tax/customers
+    - GET    https://api.numeralhq.com/tax/customers/{customer_id}
+    - DELETE https://api.numeralhq.com/tax/customers/{customer_id}
+    - GET    https://api.numeralhq.com/tax/ping
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.numeralhq.com
+      documented: true
+    - protocol: Webhooks
+      scheme: https
+      documented: false
+      note: >-
+        No public webhook subscription/registration endpoint is documented in
+        the Numeral API reference. Event notifications (filing, registration,
+        nexus alerts) are delivered via the platform and integrations.
+  platformOnlyCapabilities:
+    - Filing and remittance (Autofile)
+    - State registration (Autoregister)
+    - Physical / economic nexus monitoring and state-crossing alerts
+    - Exemption certificate management
+  authentication:
+    type: bearer
+    note: API key passed as a Bearer token in the Authorization header; X-API-Version header selects the API version (default 2024-09-01).
+  sdks:
+    - Python
+    - Ruby
+    - Java
+sources:
+  - url: https://docs.numeral.com/api-reference/introduction
+    type: APIReference
+    note: Base URL api.numeralhq.com, Bearer auth, X-API-Version header; documents tax calc / transactions / refunds / products / customers / ping.
+  - url: https://docs.numeral.com/api-reference/openapi.json
+    type: OpenAPI
+    note: Machine-readable spec confirming the documented REST surface; no webhook endpoints present.
+  - url: https://www.numeral.com/product/api
+    type: Documentation
+    note: Product page for the sales-tax calculation API and engine; lists Python/Ruby/Java SDKs.
+  - url: https://www.numeral.com/pricing
+    type: Plans
+    note: Per-event pricing ($75/filing, $150/registration); API access gated to the Pro tier.
+  - url: https://docs.numeral.io/reference/list-transactions
+    type: Documentation
+    note: Belongs to the unrelated Numeral (numeral.io / Mambu) payments company; used only to confirm disambiguation.
+actions:
+  apisYmlUpdated: true
+  reason: |
+    Documented the real REST surface (api.numeralhq.com) across calculations,
+    transactions, products/tax-codes, and customers, and recorded that
+    filings, registrations/nexus, and webhooks are platform-managed rather
+    than self-serve public REST endpoints. Captured the numeral.io payments
+    disambiguation so the two same-named companies are never conflated.

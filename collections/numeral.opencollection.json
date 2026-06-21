@@ -1,0 +1,267 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Numeral API",
+    "version": "2026-03-01"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tax Calculations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get tax information for a given product and address or IP.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.numeralhq.com/tax/calculations",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"customer\": {\n    \"customer_address\": {\n      \"line_1\": \"\",\n      \"city\": \"\",\n      \"state\": \"\",\n      \"postal_code\": \"\",\n      \"country\": \"US\"\n    }\n  },\n  \"order_details\": {\n    \"customer_currency_code\": \"USD\",\n    \"line_items\": [\n      {\n        \"reference_product_id\": \"\",\n        \"amount\": 0,\n        \"quantity\": 1\n      }\n    ]\n  }\n}"
+            }
+          },
+          "docs": "Get tax information for a given product and address or IP."
+        },
+        {
+          "info": {
+            "name": "Calculate tax for platform / marketplace transactions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.numeralhq.com/tax/platform_calculations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Calculate tax for marketplace / platform transactions on behalf of a merchant."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Record a completed sale.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.numeralhq.com/tax/transactions",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"calculation_id\": \"\",\n  \"reference_order_id\": \"\",\n  \"transaction_processed_at\": \"\"\n}"
+            }
+          },
+          "docs": "Record a completed sale from a prior calculation."
+        },
+        {
+          "info": {
+            "name": "Retrieve a specific transaction.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.numeralhq.com/tax/transactions/{{transaction_id}}"
+          },
+          "docs": "Retrieve a specific transaction."
+        },
+        {
+          "info": {
+            "name": "Delete a specific transaction.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.numeralhq.com/tax/transactions/{{transaction_id}}"
+          },
+          "docs": "Delete a specific transaction."
+        },
+        {
+          "info": {
+            "name": "Retrieve refunds for a specific transaction.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.numeralhq.com/tax/transactions/{{transaction_id}}/refunds"
+          },
+          "docs": "Retrieve refunds for a specific transaction."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Refunds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add a refund to a transaction.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.numeralhq.com/tax/refunds",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"transaction_id\": \"\",\n  \"type\": \"\",\n  \"refund_processed_at\": \"\"\n}"
+            }
+          },
+          "docs": "Add a refund to a transaction."
+        },
+        {
+          "info": {
+            "name": "Reverse a previously created refund.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.numeralhq.com/tax/refund_reversals",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"refund_id\": \"\"\n}"
+            }
+          },
+          "docs": "Reverse a refund you have previously created."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create and categorize a new product.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.numeralhq.com/tax/products",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"reference_product_id\": \"\",\n  \"reference_product_name\": \"\",\n  \"product_category\": \"\"\n}"
+            }
+          },
+          "docs": "Create and categorize a new product."
+        },
+        {
+          "info": {
+            "name": "List products.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.numeralhq.com/tax/products"
+          },
+          "docs": "Retrieve a paginated list of up to 50 products."
+        },
+        {
+          "info": {
+            "name": "Retrieve a specific product.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.numeralhq.com/tax/products/{{reference_product_id}}"
+          },
+          "docs": "Retrieve a specific product."
+        },
+        {
+          "info": {
+            "name": "Delete a specific product.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.numeralhq.com/tax/products/{{reference_product_id}}"
+          },
+          "docs": "Delete a specific product."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new customer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.numeralhq.com/tax/customers",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"name\": \"\",\n  \"email\": \"\",\n  \"is_tax_exempt\": false,\n  \"reference_customer_id\": \"\"\n}"
+            }
+          },
+          "docs": "Create a new customer and optionally mark as tax exempt."
+        },
+        {
+          "info": {
+            "name": "Retrieve a specific customer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.numeralhq.com/tax/customers/{{customer_id}}"
+          },
+          "docs": "Retrieve a specific customer."
+        },
+        {
+          "info": {
+            "name": "Delete a specific customer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.numeralhq.com/tax/customers/{{customer_id}}"
+          },
+          "docs": "Delete a specific customer."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authenticated health check.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.numeralhq.com/tax/ping"
+          },
+          "docs": "Authenticated health check endpoint."
+        }
+      ]
+    }
+  ]
+}

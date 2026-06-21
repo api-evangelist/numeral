@@ -1,0 +1,615 @@
+openapi: 3.0.1
+info:
+  title: Numeral API
+  description: >-
+    REST API for the Numeral (Numeral HQ) sales-tax compliance platform. Calculate
+    real-time sales tax by customer location, record transactions and refunds, and
+    manage products and customers. Registrations, nexus monitoring, filing, and
+    remittance are delivered as managed platform services on top of the data captured
+    through this API. Not affiliated with Numeral (numeral.io), an unrelated payment
+    operations company.
+  termsOfService: https://www.numeral.com/terms
+  contact:
+    name: Numeral Support
+    url: https://www.numeral.com/
+  version: '2026-03-01'
+servers:
+  - url: https://api.numeralhq.com
+    description: Numeral production API
+security:
+  - bearerAuth: []
+tags:
+  - name: Tax Calculations
+  - name: Transactions
+  - name: Refunds
+  - name: Products
+  - name: Customers
+  - name: Health
+paths:
+  /tax/calculations:
+    post:
+      operationId: createCalculation
+      tags:
+        - Tax Calculations
+      summary: Get tax information for a given product and address or IP.
+      parameters:
+        - $ref: '#/components/parameters/ApiVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculationRequest'
+      responses:
+        '200':
+          description: Calculated tax for the supplied order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculationResponse'
+  /tax/platform_calculations:
+    post:
+      operationId: createPlatformCalculation
+      tags:
+        - Tax Calculations
+      summary: Calculate tax for marketplace / platform transactions on behalf of a merchant.
+      parameters:
+        - $ref: '#/components/parameters/ApiVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculationRequest'
+      responses:
+        '200':
+          description: Calculated tax for the platform order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculationResponse'
+  /tax/transactions:
+    post:
+      operationId: createTransaction
+      tags:
+        - Transactions
+      summary: Record a completed sale from a prior calculation.
+      parameters:
+        - $ref: '#/components/parameters/ApiVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionRequest'
+      responses:
+        '200':
+          description: The recorded transaction.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionResponse'
+  /tax/transactions/{transaction_id}:
+    get:
+      operationId: getTransaction
+      tags:
+        - Transactions
+      summary: Retrieve a specific transaction.
+      parameters:
+        - $ref: '#/components/parameters/TransactionId'
+      responses:
+        '200':
+          description: The requested transaction.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionResponse'
+    delete:
+      operationId: deleteTransaction
+      tags:
+        - Transactions
+      summary: Delete a specific transaction.
+      parameters:
+        - $ref: '#/components/parameters/TransactionId'
+      responses:
+        '200':
+          description: Deletion confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletedResource'
+  /tax/transactions/{transaction_id}/refunds:
+    get:
+      operationId: getRefundsForTransaction
+      tags:
+        - Refunds
+      summary: Retrieve refunds for a specific transaction.
+      parameters:
+        - $ref: '#/components/parameters/TransactionId'
+      responses:
+        '200':
+          description: Refunds associated with the transaction.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  refunds:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RefundResponse'
+  /tax/refunds:
+    post:
+      operationId: createRefund
+      tags:
+        - Refunds
+      summary: Add a refund to a transaction.
+      parameters:
+        - $ref: '#/components/parameters/ApiVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefundRequest'
+      responses:
+        '200':
+          description: The created refund.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefundResponse'
+  /tax/refund_reversals:
+    post:
+      operationId: createRefundReversal
+      tags:
+        - Refunds
+      summary: Reverse a refund you have previously created.
+      parameters:
+        - $ref: '#/components/parameters/ApiVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - refund_id
+              properties:
+                refund_id:
+                  type: string
+                  description: Identifier of the refund to reverse.
+      responses:
+        '200':
+          description: The reversed refund.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefundResponse'
+  /tax/products:
+    post:
+      operationId: createProduct
+      tags:
+        - Products
+      summary: Create and categorize a new product.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequest'
+      responses:
+        '200':
+          description: The created product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+    get:
+      operationId: listProducts
+      tags:
+        - Products
+      summary: Retrieve a paginated list of up to 50 products.
+      parameters:
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Pagination cursor (last product id from the prior page).
+      responses:
+        '200':
+          description: A page of products.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  has_more:
+                    type: boolean
+                  last_product_id:
+                    type: string
+                  products:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ProductResponse'
+  /tax/products/{reference_product_id}:
+    get:
+      operationId: getProduct
+      tags:
+        - Products
+      summary: Retrieve a specific product.
+      parameters:
+        - name: reference_product_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+    delete:
+      operationId: deleteProduct
+      tags:
+        - Products
+      summary: Delete a specific product.
+      parameters:
+        - name: reference_product_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Deletion confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletedResource'
+  /tax/customers:
+    post:
+      operationId: createCustomer
+      tags:
+        - Customers
+      summary: Create a new customer and optionally mark as tax exempt.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'
+      responses:
+        '200':
+          description: The created customer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+  /tax/customers/{customer_id}:
+    get:
+      operationId: getCustomer
+      tags:
+        - Customers
+      summary: Retrieve a specific customer.
+      parameters:
+        - name: customer_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id_type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - id
+              - reference_customer_id
+          description: Whether customer_id is Numeral's id or your reference_customer_id.
+      responses:
+        '200':
+          description: The requested customer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+    delete:
+      operationId: deleteCustomer
+      tags:
+        - Customers
+      summary: Delete a specific customer.
+      parameters:
+        - name: customer_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Deletion confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletedResource'
+  /tax/ping:
+    get:
+      operationId: pingHealthCheck
+      tags:
+        - Health
+      summary: Authenticated health check endpoint.
+      parameters:
+        - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Service health.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  env:
+                    type: string
+                  timestamp:
+                    type: string
+                    format: date-time
+                  api_version:
+                    type: string
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Provide your Numeral API key as a Bearer token in the Authorization header.
+  parameters:
+    ApiVersion:
+      name: X-API-Version
+      in: header
+      required: false
+      schema:
+        type: string
+        enum:
+          - '2026-03-01'
+          - '2026-01-01'
+          - '2025-05-12'
+          - '2024-09-01'
+        default: '2024-09-01'
+      description: API version. Defaults to 2024-09-01 when omitted.
+    TransactionId:
+      name: transaction_id
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    Address:
+      type: object
+      properties:
+        line_1:
+          type: string
+        line_2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+        country:
+          type: string
+    LineItem:
+      type: object
+      properties:
+        reference_product_id:
+          type: string
+        amount:
+          type: integer
+          description: Line amount in the smallest currency unit (e.g., cents).
+        quantity:
+          type: integer
+        product_category:
+          type: string
+    CalculationRequest:
+      type: object
+      properties:
+        customer:
+          type: object
+          properties:
+            reference_customer_id:
+              type: string
+            customer_address:
+              $ref: '#/components/schemas/Address'
+            ip_address:
+              type: string
+        origin_address:
+          $ref: '#/components/schemas/Address'
+        order_details:
+          type: object
+          properties:
+            customer_currency_code:
+              type: string
+            line_items:
+              type: array
+              items:
+                $ref: '#/components/schemas/LineItem'
+        metadata:
+          type: object
+          additionalProperties: true
+    CalculationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        customer_currency_code:
+          type: string
+        line_items:
+          type: array
+          items:
+            type: object
+            properties:
+              reference_product_id:
+                type: string
+              tax_amount:
+                type: integer
+              taxable_amount:
+                type: integer
+        total_tax_amount:
+          type: integer
+        total_amount_excluding_tax:
+          type: integer
+        total_amount_including_tax:
+          type: integer
+        expires_at:
+          type: string
+          format: date-time
+        testmode:
+          type: boolean
+        address_resolution_status:
+          type: string
+        address_used:
+          $ref: '#/components/schemas/Address'
+    TransactionRequest:
+      type: object
+      required:
+        - calculation_id
+      properties:
+        calculation_id:
+          type: string
+        reference_order_id:
+          type: string
+        transaction_processed_at:
+          type: string
+          format: date-time
+        metadata:
+          type: object
+          additionalProperties: true
+    TransactionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        calculation_id:
+          type: string
+        reference_order_id:
+          type: string
+        customer_currency_code:
+          type: string
+        filing_currency_code:
+          type: string
+        line_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+        testmode:
+          type: boolean
+        metadata:
+          type: object
+          additionalProperties: true
+    RefundRequest:
+      type: object
+      required:
+        - transaction_id
+      properties:
+        transaction_id:
+          type: string
+        type:
+          type: string
+        refund_processed_at:
+          type: string
+          format: date-time
+        line_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+    RefundResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        refund_type:
+          type: string
+        testmode:
+          type: boolean
+        refund_processed_at:
+          type: string
+          format: date-time
+        line_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+    ProductRequest:
+      type: object
+      required:
+        - reference_product_id
+      properties:
+        reference_product_id:
+          type: string
+        reference_product_name:
+          type: string
+        product_category:
+          type: string
+          description: Tax-code product category that drives taxability.
+    ProductResponse:
+      type: object
+      properties:
+        object:
+          type: string
+        reference_product_id:
+          type: string
+        reference_product_name:
+          type: string
+        product_category:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        testmode:
+          type: boolean
+    CustomerRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        is_tax_exempt:
+          type: boolean
+        reference_customer_id:
+          type: string
+    CustomerResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        reference_customer_id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        is_tax_exempt:
+          type: boolean
+    DeletedResource:
+      type: object
+      properties:
+        object:
+          type: string
+        deleted_at:
+          type: string
+          format: date-time

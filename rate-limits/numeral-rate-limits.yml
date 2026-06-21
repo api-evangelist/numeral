@@ -1,0 +1,50 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Numeral
+providerId: numeral
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Sales Tax
+- Tax Compliance
+- Ecommerce
+- SaaS
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The Numeral REST API authenticates with a Bearer API key and is accessed at
+  https://api.numeralhq.com. Specific published rate limits (RPM/RPS, daily
+  quotas) are not documented in the public API reference. Clients should expect
+  HTTP 429 on throttling and implement retries. Specific limit values are not
+  reconciled in this artifact.
+notes: >-
+  No numeric rate limits are published in Numeral's public API reference as of
+  this writing. Confirm any per-account limits with Numeral during onboarding /
+  reconciliation; API access is gated to the Pro tier.
+sources:
+- https://docs.numeral.com/api-reference/introduction
+- https://www.numeral.com/product/api
+responseCodes:
+  throttled: 429
+limits:
+- name: Requests Per Minute
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: No public RPM value documented; confirm with Numeral.
+- name: Test vs Live Keys
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Test-mode (testmode=true) and live keys are issued separately from the dashboard.
+policies:
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+- name: Idempotency
+  description: Use reference_order_id / reference_product_id / reference_customer_id to avoid duplicate records on retries.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

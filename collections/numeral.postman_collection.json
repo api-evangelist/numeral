@@ -1,0 +1,310 @@
+{
+  "info": {
+    "name": "Numeral API",
+    "description": "Numeral (Numeral HQ) sales-tax compliance REST API. Base URL https://api.numeralhq.com, Bearer API-key auth, X-API-Version header. Not the numeral.io payments company.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.numeralhq.com"
+    },
+    {
+      "key": "apiVersion",
+      "value": "2026-03-01"
+    }
+  ],
+  "item": [
+    {
+      "name": "Tax Calculations",
+      "item": [
+        {
+          "name": "Get tax information for a given product and address or IP.",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-API-Version", "value": "{{apiVersion}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tax/calculations",
+              "host": ["{{baseUrl}}"],
+              "path": ["tax", "calculations"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer\": {\n    \"customer_address\": {\n      \"line_1\": \"\",\n      \"city\": \"\",\n      \"state\": \"\",\n      \"postal_code\": \"\",\n      \"country\": \"US\"\n    }\n  },\n  \"order_details\": {\n    \"customer_currency_code\": \"USD\",\n    \"line_items\": [\n      {\n        \"reference_product_id\": \"\",\n        \"amount\": 0,\n        \"quantity\": 1\n      }\n    ]\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Calculate tax for platform / marketplace transactions.",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-API-Version", "value": "{{apiVersion}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tax/platform_calculations",
+              "host": ["{{baseUrl}}"],
+              "path": ["tax", "platform_calculations"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Transactions",
+      "item": [
+        {
+          "name": "Record a completed sale.",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-API-Version", "value": "{{apiVersion}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tax/transactions",
+              "host": ["{{baseUrl}}"],
+              "path": ["tax", "transactions"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"calculation_id\": \"\",\n  \"reference_order_id\": \"\",\n  \"transaction_processed_at\": \"\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Retrieve a specific transaction.",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/tax/transactions/{{transaction_id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["tax", "transactions", "{{transaction_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete a specific transaction.",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/tax/transactions/{{transaction_id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["tax", "transactions", "{{transaction_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Retrieve refunds for a specific transaction.",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/tax/transactions/{{transaction_id}}/refunds",
+              "host": ["{{baseUrl}}"],
+              "path": ["tax", "transactions", "{{transaction_id}}", "refunds"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Refunds",
+      "item": [
+        {
+          "name": "Add a refund to a transaction.",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-API-Version", "value": "{{apiVersion}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tax/refunds",
+              "host": ["{{baseUrl}}"],
+              "path": ["tax", "refunds"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transaction_id\": \"\",\n  \"type\": \"\",\n  \"refund_processed_at\": \"\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Reverse a previously created refund.",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-API-Version", "value": "{{apiVersion}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tax/refund_reversals",
+              "host": ["{{baseUrl}}"],
+              "path": ["tax", "refund_reversals"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refund_id\": \"\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Create and categorize a new product.",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tax/products",
+              "host": ["{{baseUrl}}"],
+              "path": ["tax", "products"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reference_product_id\": \"\",\n  \"reference_product_name\": \"\",\n  \"product_category\": \"\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "List products.",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/tax/products",
+              "host": ["{{baseUrl}}"],
+              "path": ["tax", "products"]
+            }
+          }
+        },
+        {
+          "name": "Retrieve a specific product.",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/tax/products/{{reference_product_id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["tax", "products", "{{reference_product_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete a specific product.",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/tax/products/{{reference_product_id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["tax", "products", "{{reference_product_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "Create a new customer.",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tax/customers",
+              "host": ["{{baseUrl}}"],
+              "path": ["tax", "customers"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"email\": \"\",\n  \"is_tax_exempt\": false,\n  \"reference_customer_id\": \"\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Retrieve a specific customer.",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/tax/customers/{{customer_id}}?id_type=id",
+              "host": ["{{baseUrl}}"],
+              "path": ["tax", "customers", "{{customer_id}}"],
+              "query": [
+                { "key": "id_type", "value": "id" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete a specific customer.",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/tax/customers/{{customer_id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["tax", "customers", "{{customer_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Authenticated health check.",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "X-API-Version", "value": "{{apiVersion}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tax/ping",
+              "host": ["{{baseUrl}}"],
+              "path": ["tax", "ping"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

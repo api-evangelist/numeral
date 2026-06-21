@@ -1,0 +1,113 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Numeral
+providerId: numeral
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Sales Tax
+- Tax Compliance
+- Ecommerce
+- SaaS
+- Plans
+description: >-
+  Numeral is sales-led with per-event compliance pricing rather than metered API
+  call pricing. The free Monitoring plan covers nexus monitoring and exposure
+  auditing. The Standard plan charges $75 per filing and $150 per state
+  registration with no monthly subscription. The Pro plan (custom pricing,
+  disclosed after a sales call) adds API access, exemption certificate management,
+  and global coverage. Exact API-access pricing is not publicly published, so
+  this artifact is not reconciled.
+notes: >-
+  Pricing is published on the Numeral pricing page and may change. API access is
+  gated to the Pro tier with custom, revenue-based pricing quoted via sales.
+  Verify current figures during reconciliation.
+sources:
+- https://www.numeral.com/pricing
+- https://www.numeral.com/product/api
+- https://docs.numeral.com/api-reference/introduction
+plans:
+- id: numeral-monitoring
+  name: Monitoring (Free)
+  type: free
+  description: >-
+    Free nexus monitoring and exposure auditing with state-crossing alerts and
+    integrations to Shopify, Stripe, Amazon, Walmart, and others.
+  entries:
+  - label: Nexus Monitoring
+    name: nexus_monitoring
+    type: free
+    metric: monitoring
+    limit: -1
+    timeFrame: month
+    geo: us
+    unit: 1
+    price: $0
+    userMultiplied: false
+  elements:
+  - name: Economic & Physical Nexus Monitoring
+  - name: Exposure / Historical Liability Audit
+  - name: State Crossing Alerts
+- id: numeral-standard
+  name: Standard
+  type: usage
+  description: >-
+    Per-event compliance pricing with no monthly subscription. Filing,
+    remittance, Autofile, and Autoregister across all US states.
+  entries:
+  - label: Filing
+    name: filing
+    type: usage
+    metric: filings
+    limit: -1
+    timeFrame: month
+    geo: us
+    unit: 1
+    price: $75 per filing
+    userMultiplied: false
+  - label: State Registration
+    name: registration
+    type: usage
+    metric: registrations
+    limit: -1
+    timeFrame: month
+    geo: us
+    unit: 1
+    price: $150 per registration
+    userMultiplied: false
+  elements:
+  - name: Autofile
+  - name: Autoregister
+  - name: Remittance
+  - name: Automatic Tax Code Classification
+  - name: Virtual Mailbox
+  - name: Numeral Filing Guarantee
+- id: numeral-pro
+  name: Pro
+  type: enterprise
+  description: >-
+    Everything in Standard plus API access, exemption certificate management,
+    voluntary disclosure agreements, access to sales-tax experts, and global
+    coverage in 80+ countries. Custom revenue-based pricing quoted by sales.
+  entries:
+  - label: Pro Agreement
+    name: pro
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: API Access
+  - name: Tax Calculation API
+  - name: Exemption Certificate Management
+  - name: Voluntary Disclosure Agreements
+  - name: Global Coverage (80+ countries)
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,88 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Numeral
+providerId: numeral
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Sales Tax
+- Tax Compliance
+- Ecommerce
+- SaaS
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Numeral spend. Numeral bills per compliance event rather than per
+  API call: $75 per filing and $150 per state registration on the Standard plan,
+  with a free Monitoring tier and custom revenue-based Pro pricing that unlocks API
+  access. Cost scales with the number of states, filing frequency, and
+  registrations rather than request volume.
+notes: >-
+  API-access pricing on the Pro tier is custom and sales-quoted; figures here are
+  the publicly listed Standard per-event rates and are subject to change. Verify
+  against the Numeral pricing page during reconciliation.
+sources:
+- https://www.numeral.com/pricing
+- https://www.numeral.com/product/api
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Numeral
+serviceCategory: Tax and Compliance
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+focusColumns:
+  ServiceName: Numeral Sales Tax Compliance
+  ServiceCategory: Tax and Compliance
+  ProviderName: Numeral
+  PublisherName: Numeral
+  InvoiceIssuerName: Numeral
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: filings
+  description: Sales-tax returns filed and remitted, billed per filing ($75 on Standard).
+  unit: filings
+  aggregation: sum
+  dimensions:
+  - account
+  - state
+- name: registrations
+  description: State sales-tax registrations, billed per registration ($150 on Standard).
+  unit: registrations
+  aggregation: sum
+  dimensions:
+  - account
+  - state
+- name: api_calculations
+  description: Tax calculation API calls. Included with Pro API access; not separately metered in public pricing.
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - account
+  - api
+principles:
+- name: Visibility
+  description: Track filings and registrations per state from the Numeral dashboard; map to entities/markets.
+- name: Allocation
+  description: Attribute filing and registration spend to the states and channels that create nexus.
+- name: Optimization
+  description: Use nexus monitoring to register only where economically required; consolidate filings; deregister where exposure has ended.
+- name: Accountability
+  description: Assign an owner for the compliance footprint and review per-state filing cost against revenue each period.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
