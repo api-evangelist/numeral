@@ -136,6 +136,10 @@ apis:
     the Numeral platform; no public webhook subscription endpoint is documented in
     the REST API reference as of this writing (see review.yml).
 common:
+- type: DomainSecurity
+  url: security/numeral-domain-security.yml
+- type: Authentication
+  url: authentication/numeral-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/numeralhq
 - type: LinkedIn
