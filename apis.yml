@@ -136,6 +136,8 @@ apis:
     the Numeral platform; no public webhook subscription endpoint is documented in
     the REST API reference as of this writing (see review.yml).
 common:
+- type: AgenticAccess
+  url: agentic-access/numeral-agentic-access.yml
 - type: DomainSecurity
   url: security/numeral-domain-security.yml
 - type: Authentication
