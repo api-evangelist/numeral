@@ -1,0 +1,62 @@
+openapi: 3.0.1
+info:
+  title: Numeral Customers Health API
+  description: REST API for the Numeral (Numeral HQ) sales-tax compliance platform. Calculate real-time sales tax by customer location, record transactions and refunds, and manage products and customers. Registrations, nexus monitoring, filing, and remittance are delivered as managed platform services on top of the data captured through this API. Not affiliated with Numeral (numeral.io), an unrelated payment operations company.
+  termsOfService: https://www.numeral.com/terms
+  contact:
+    name: Numeral Support
+    url: https://www.numeral.com/
+  version: '2026-03-01'
+servers:
+- url: https://api.numeralhq.com
+  description: Numeral production API
+security:
+- bearerAuth: []
+tags:
+- name: Health
+paths:
+  /tax/ping:
+    get:
+      operationId: pingHealthCheck
+      tags:
+      - Health
+      summary: Authenticated health check endpoint.
+      parameters:
+      - $ref: '#/components/parameters/ApiVersion'
+      responses:
+        '200':
+          description: Service health.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  env:
+                    type: string
+                  timestamp:
+                    type: string
+                    format: date-time
+                  api_version:
+                    type: string
+components:
+  parameters:
+    ApiVersion:
+      name: X-API-Version
+      in: header
+      required: false
+      schema:
+        type: string
+        enum:
+        - '2026-03-01'
+        - '2026-01-01'
+        - '2025-05-12'
+        - '2024-09-01'
+        default: '2024-09-01'
+      description: API version. Defaults to 2024-09-01 when omitted.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Provide your Numeral API key as a Bearer token in the Authorization header.

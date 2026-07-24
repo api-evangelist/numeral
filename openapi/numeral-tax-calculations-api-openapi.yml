@@ -1,0 +1,168 @@
+openapi: 3.0.1
+info:
+  title: Numeral Customers Tax Calculations API
+  description: REST API for the Numeral (Numeral HQ) sales-tax compliance platform. Calculate real-time sales tax by customer location, record transactions and refunds, and manage products and customers. Registrations, nexus monitoring, filing, and remittance are delivered as managed platform services on top of the data captured through this API. Not affiliated with Numeral (numeral.io), an unrelated payment operations company.
+  termsOfService: https://www.numeral.com/terms
+  contact:
+    name: Numeral Support
+    url: https://www.numeral.com/
+  version: '2026-03-01'
+servers:
+- url: https://api.numeralhq.com
+  description: Numeral production API
+security:
+- bearerAuth: []
+tags:
+- name: Tax Calculations
+paths:
+  /tax/calculations:
+    post:
+      operationId: createCalculation
+      tags:
+      - Tax Calculations
+      summary: Get tax information for a given product and address or IP.
+      parameters:
+      - $ref: '#/components/parameters/ApiVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculationRequest'
+      responses:
+        '200':
+          description: Calculated tax for the supplied order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculationResponse'
+  /tax/platform_calculations:
+    post:
+      operationId: createPlatformCalculation
+      tags:
+      - Tax Calculations
+      summary: Calculate tax for marketplace / platform transactions on behalf of a merchant.
+      parameters:
+      - $ref: '#/components/parameters/ApiVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculationRequest'
+      responses:
+        '200':
+          description: Calculated tax for the platform order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculationResponse'
+components:
+  schemas:
+    CalculationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        customer_currency_code:
+          type: string
+        line_items:
+          type: array
+          items:
+            type: object
+            properties:
+              reference_product_id:
+                type: string
+              tax_amount:
+                type: integer
+              taxable_amount:
+                type: integer
+        total_tax_amount:
+          type: integer
+        total_amount_excluding_tax:
+          type: integer
+        total_amount_including_tax:
+          type: integer
+        expires_at:
+          type: string
+          format: date-time
+        testmode:
+          type: boolean
+        address_resolution_status:
+          type: string
+        address_used:
+          $ref: '#/components/schemas/Address'
+    LineItem:
+      type: object
+      properties:
+        reference_product_id:
+          type: string
+        amount:
+          type: integer
+          description: Line amount in the smallest currency unit (e.g., cents).
+        quantity:
+          type: integer
+        product_category:
+          type: string
+    CalculationRequest:
+      type: object
+      properties:
+        customer:
+          type: object
+          properties:
+            reference_customer_id:
+              type: string
+            customer_address:
+              $ref: '#/components/schemas/Address'
+            ip_address:
+              type: string
+        origin_address:
+          $ref: '#/components/schemas/Address'
+        order_details:
+          type: object
+          properties:
+            customer_currency_code:
+              type: string
+            line_items:
+              type: array
+              items:
+                $ref: '#/components/schemas/LineItem'
+        metadata:
+          type: object
+          additionalProperties: true
+    Address:
+      type: object
+      properties:
+        line_1:
+          type: string
+        line_2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+        country:
+          type: string
+  parameters:
+    ApiVersion:
+      name: X-API-Version
+      in: header
+      required: false
+      schema:
+        type: string
+        enum:
+        - '2026-03-01'
+        - '2026-01-01'
+        - '2025-05-12'
+        - '2024-09-01'
+        default: '2024-09-01'
+      description: API version. Defaults to 2024-09-01 when omitted.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Provide your Numeral API key as a Bearer token in the Authorization header.

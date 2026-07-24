@@ -1,0 +1,123 @@
+openapi: 3.0.1
+info:
+  title: Numeral Customers API
+  description: REST API for the Numeral (Numeral HQ) sales-tax compliance platform. Calculate real-time sales tax by customer location, record transactions and refunds, and manage products and customers. Registrations, nexus monitoring, filing, and remittance are delivered as managed platform services on top of the data captured through this API. Not affiliated with Numeral (numeral.io), an unrelated payment operations company.
+  termsOfService: https://www.numeral.com/terms
+  contact:
+    name: Numeral Support
+    url: https://www.numeral.com/
+  version: '2026-03-01'
+servers:
+- url: https://api.numeralhq.com
+  description: Numeral production API
+security:
+- bearerAuth: []
+tags:
+- name: Customers
+paths:
+  /tax/customers:
+    post:
+      operationId: createCustomer
+      tags:
+      - Customers
+      summary: Create a new customer and optionally mark as tax exempt.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'
+      responses:
+        '200':
+          description: The created customer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+  /tax/customers/{customer_id}:
+    get:
+      operationId: getCustomer
+      tags:
+      - Customers
+      summary: Retrieve a specific customer.
+      parameters:
+      - name: customer_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id_type
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - id
+          - reference_customer_id
+        description: Whether customer_id is Numeral's id or your reference_customer_id.
+      responses:
+        '200':
+          description: The requested customer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+    delete:
+      operationId: deleteCustomer
+      tags:
+      - Customers
+      summary: Delete a specific customer.
+      parameters:
+      - name: customer_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Deletion confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletedResource'
+components:
+  schemas:
+    CustomerResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        reference_customer_id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        is_tax_exempt:
+          type: boolean
+    DeletedResource:
+      type: object
+      properties:
+        object:
+          type: string
+        deleted_at:
+          type: string
+          format: date-time
+    CustomerRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        is_tax_exempt:
+          type: boolean
+        reference_customer_id:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Provide your Numeral API key as a Bearer token in the Authorization header.

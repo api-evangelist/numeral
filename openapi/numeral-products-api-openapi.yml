@@ -1,0 +1,147 @@
+openapi: 3.0.1
+info:
+  title: Numeral Customers Products API
+  description: REST API for the Numeral (Numeral HQ) sales-tax compliance platform. Calculate real-time sales tax by customer location, record transactions and refunds, and manage products and customers. Registrations, nexus monitoring, filing, and remittance are delivered as managed platform services on top of the data captured through this API. Not affiliated with Numeral (numeral.io), an unrelated payment operations company.
+  termsOfService: https://www.numeral.com/terms
+  contact:
+    name: Numeral Support
+    url: https://www.numeral.com/
+  version: '2026-03-01'
+servers:
+- url: https://api.numeralhq.com
+  description: Numeral production API
+security:
+- bearerAuth: []
+tags:
+- name: Products
+paths:
+  /tax/products:
+    post:
+      operationId: createProduct
+      tags:
+      - Products
+      summary: Create and categorize a new product.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequest'
+      responses:
+        '200':
+          description: The created product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+    get:
+      operationId: listProducts
+      tags:
+      - Products
+      summary: Retrieve a paginated list of up to 50 products.
+      parameters:
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Pagination cursor (last product id from the prior page).
+      responses:
+        '200':
+          description: A page of products.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  has_more:
+                    type: boolean
+                  last_product_id:
+                    type: string
+                  products:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ProductResponse'
+  /tax/products/{reference_product_id}:
+    get:
+      operationId: getProduct
+      tags:
+      - Products
+      summary: Retrieve a specific product.
+      parameters:
+      - name: reference_product_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The requested product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+    delete:
+      operationId: deleteProduct
+      tags:
+      - Products
+      summary: Delete a specific product.
+      parameters:
+      - name: reference_product_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Deletion confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletedResource'
+components:
+  schemas:
+    ProductRequest:
+      type: object
+      required:
+      - reference_product_id
+      properties:
+        reference_product_id:
+          type: string
+        reference_product_name:
+          type: string
+        product_category:
+          type: string
+          description: Tax-code product category that drives taxability.
+    DeletedResource:
+      type: object
+      properties:
+        object:
+          type: string
+        deleted_at:
+          type: string
+          format: date-time
+    ProductResponse:
+      type: object
+      properties:
+        object:
+          type: string
+        reference_product_id:
+          type: string
+        reference_product_name:
+          type: string
+        product_category:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        testmode:
+          type: boolean
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Provide your Numeral API key as a Bearer token in the Authorization header.

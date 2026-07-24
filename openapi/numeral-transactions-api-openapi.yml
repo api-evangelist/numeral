@@ -1,0 +1,153 @@
+openapi: 3.0.1
+info:
+  title: Numeral Customers Transactions API
+  description: REST API for the Numeral (Numeral HQ) sales-tax compliance platform. Calculate real-time sales tax by customer location, record transactions and refunds, and manage products and customers. Registrations, nexus monitoring, filing, and remittance are delivered as managed platform services on top of the data captured through this API. Not affiliated with Numeral (numeral.io), an unrelated payment operations company.
+  termsOfService: https://www.numeral.com/terms
+  contact:
+    name: Numeral Support
+    url: https://www.numeral.com/
+  version: '2026-03-01'
+servers:
+- url: https://api.numeralhq.com
+  description: Numeral production API
+security:
+- bearerAuth: []
+tags:
+- name: Transactions
+paths:
+  /tax/transactions:
+    post:
+      operationId: createTransaction
+      tags:
+      - Transactions
+      summary: Record a completed sale from a prior calculation.
+      parameters:
+      - $ref: '#/components/parameters/ApiVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionRequest'
+      responses:
+        '200':
+          description: The recorded transaction.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionResponse'
+  /tax/transactions/{transaction_id}:
+    get:
+      operationId: getTransaction
+      tags:
+      - Transactions
+      summary: Retrieve a specific transaction.
+      parameters:
+      - $ref: '#/components/parameters/TransactionId'
+      responses:
+        '200':
+          description: The requested transaction.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionResponse'
+    delete:
+      operationId: deleteTransaction
+      tags:
+      - Transactions
+      summary: Delete a specific transaction.
+      parameters:
+      - $ref: '#/components/parameters/TransactionId'
+      responses:
+        '200':
+          description: Deletion confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletedResource'
+components:
+  schemas:
+    LineItem:
+      type: object
+      properties:
+        reference_product_id:
+          type: string
+        amount:
+          type: integer
+          description: Line amount in the smallest currency unit (e.g., cents).
+        quantity:
+          type: integer
+        product_category:
+          type: string
+    DeletedResource:
+      type: object
+      properties:
+        object:
+          type: string
+        deleted_at:
+          type: string
+          format: date-time
+    TransactionRequest:
+      type: object
+      required:
+      - calculation_id
+      properties:
+        calculation_id:
+          type: string
+        reference_order_id:
+          type: string
+        transaction_processed_at:
+          type: string
+          format: date-time
+        metadata:
+          type: object
+          additionalProperties: true
+    TransactionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        calculation_id:
+          type: string
+        reference_order_id:
+          type: string
+        customer_currency_code:
+          type: string
+        filing_currency_code:
+          type: string
+        line_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+        testmode:
+          type: boolean
+        metadata:
+          type: object
+          additionalProperties: true
+  parameters:
+    TransactionId:
+      name: transaction_id
+      in: path
+      required: true
+      schema:
+        type: string
+    ApiVersion:
+      name: X-API-Version
+      in: header
+      required: false
+      schema:
+        type: string
+        enum:
+        - '2026-03-01'
+        - '2026-01-01'
+        - '2025-05-12'
+        - '2024-09-01'
+        default: '2024-09-01'
+      description: API version. Defaults to 2024-09-01 when omitted.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Provide your Numeral API key as a Bearer token in the Authorization header.
