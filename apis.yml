@@ -8,7 +8,20 @@ description: Numeral (Numeral HQ) is a sales-tax compliance and automation platf
   and refunds, and manages products and customers, while the broader platform handles
   registrations, nexus monitoring, filing, and remittance. Not to be confused with
   Numeral (numeral.io), an unrelated payment-operations company now part of Mambu.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/numeral.png
 tags:
 - Sales Tax
 - Tax Compliance
@@ -19,50 +32,6 @@ created: '2026-06-21'
 modified: '2026-06-21'
 specificationVersion: '0.19'
 apis:
-- aid: numeral:tax-calculations
-  name: Numeral Tax Calculations API
-  tags:
-  - Tax Calculation
-  - Sales Tax
-  - Rates
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.numeral.com/api-reference/introduction
-  baseURL: https://api.numeralhq.com
-  properties:
-  - url: https://docs.numeral.com/api-reference/introduction
-    type: Documentation
-  - url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/calculations
-    type: APIReference
-  - url: openapi/numeral-openapi.yml
-    type: OpenAPI
-  - url: collections/numeral.postman_collection.json
-    type: PostmanCollection
-  - url: collections/numeral.opencollection.json
-    type: OpenCollection
-  description: Calculates real-time sales tax for a given product, customer, and address
-    or IP at state, county, city, and district granularity, returning per-line-item
-    and total tax amounts. Includes platform/marketplace calculations.
-- aid: numeral:transactions
-  name: Numeral Transactions API
-  tags:
-  - Transactions
-  - Sales
-  - Refunds
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/transactions
-  baseURL: https://api.numeralhq.com
-  properties:
-  - url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/transactions
-    type: Documentation
-  - url: openapi/numeral-openapi.yml
-    type: OpenAPI
-  - url: collections/numeral.postman_collection.json
-    type: PostmanCollection
-  - url: collections/numeral.opencollection.json
-    type: OpenCollection
-  description: Records completed sales against a prior calculation, retrieves and deletes
-    transactions, and manages refunds and refund reversals that feed downstream filing
-    and remittance.
 - aid: numeral:filings
   name: Numeral Filings API
   tags:
@@ -77,10 +46,10 @@ apis:
     type: Documentation
   - url: https://www.numeral.com/pricing
     type: Plans
-  description: Sales-tax return filing and remittance (Autofile) across all US states,
-    driven by recorded transactions. Filing and remittance are delivered as managed
-    platform services rather than self-serve public REST endpoints; transaction data
-    captured via the API flows into them.
+  description: >-
+    Sales-tax return filing and remittance (Autofile) across all US states, driven by recorded transactions.
+    Filing and remittance are delivered as managed platform services rather than self-serve public REST
+    endpoints; transaction data captured via the API flows into them.
 - aid: numeral:registrations-nexus
   name: Numeral Registrations & Nexus API
   tags:
@@ -95,30 +64,10 @@ apis:
     type: Documentation
   - url: https://www.numeral.com/pricing
     type: Plans
-  description: State sales-tax registration (Autoregister) and physical/economic nexus
-    monitoring with state-crossing alerts. Provided as managed platform services on
-    top of API-captured transaction data rather than as self-serve public REST endpoints.
-- aid: numeral:tax-codes
-  name: Numeral Products & Tax Codes API
-  tags:
-  - Products
-  - Tax Codes
-  - Classification
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/products
-  baseURL: https://api.numeralhq.com
-  properties:
-  - url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/products
-    type: Documentation
-  - url: openapi/numeral-openapi.yml
-    type: OpenAPI
-  - url: collections/numeral.postman_collection.json
-    type: PostmanCollection
-  - url: collections/numeral.opencollection.json
-    type: OpenCollection
-  description: Creates, categorizes, lists, and deletes products and maps them to
-    tax-code product categories that drive correct taxability, plus customer records
-    with tax-exemption status.
+  description: >-
+    State sales-tax registration (Autoregister) and physical/economic nexus monitoring with state-crossing
+    alerts. Provided as managed platform services on top of API-captured transaction data rather than
+    as self-serve public REST endpoints.
 - aid: numeral:webhooks
   name: Numeral Webhooks
   tags:
@@ -131,10 +80,142 @@ apis:
   properties:
   - url: https://docs.numeral.com/api-reference/introduction
     type: Documentation
-  description: Event notifications for compliance and transaction lifecycle changes
-    (e.g., filing, registration, and nexus events). Webhook delivery is offered through
-    the Numeral platform; no public webhook subscription endpoint is documented in
-    the REST API reference as of this writing (see review.yml).
+  description: >-
+    Event notifications for compliance and transaction lifecycle changes (e.g., filing, registration,
+    and nexus events). Webhook delivery is offered through the Numeral platform; no public webhook subscription
+    endpoint is documented in the REST API reference as of this writing (see review.yml).
+- aid: numeral:numeral-customers-api
+  name: Numeral Customers API
+  description: The Customers API from Numeral — 2 operation(s) for customers.
+  humanURL: https://docs.numeral.com/api-reference/introduction
+  baseURL: https://api.numeralhq.com
+  tags:
+  - Customers
+  properties:
+  - type: OpenAPI
+    url: openapi/numeral-customers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.numeral.com/api-reference/introduction
+  - type: APIReference
+    url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/calculations
+  - type: PostmanCollection
+    url: collections/numeral.postman_collection.json
+  - type: OpenCollection
+    url: collections/numeral.opencollection.json
+  - type: Documentation
+    url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/transactions
+  - type: Documentation
+    url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/products
+- aid: numeral:numeral-health-api
+  name: Numeral Health API
+  description: The Health API from Numeral — 1 operation(s) for health.
+  humanURL: https://docs.numeral.com/api-reference/introduction
+  baseURL: https://api.numeralhq.com
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/numeral-health-api-openapi.yml
+  - type: Documentation
+    url: https://docs.numeral.com/api-reference/introduction
+  - type: APIReference
+    url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/calculations
+  - type: PostmanCollection
+    url: collections/numeral.postman_collection.json
+  - type: OpenCollection
+    url: collections/numeral.opencollection.json
+  - type: Documentation
+    url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/transactions
+  - type: Documentation
+    url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/products
+- aid: numeral:numeral-products-api
+  name: Numeral Products API
+  description: The Products API from Numeral — 2 operation(s) for products.
+  humanURL: https://docs.numeral.com/api-reference/introduction
+  baseURL: https://api.numeralhq.com
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/numeral-products-api-openapi.yml
+  - type: Documentation
+    url: https://docs.numeral.com/api-reference/introduction
+  - type: APIReference
+    url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/calculations
+  - type: PostmanCollection
+    url: collections/numeral.postman_collection.json
+  - type: OpenCollection
+    url: collections/numeral.opencollection.json
+  - type: Documentation
+    url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/transactions
+  - type: Documentation
+    url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/products
+- aid: numeral:numeral-refunds-api
+  name: Numeral Refunds API
+  description: The Refunds API from Numeral — 3 operation(s) for refunds.
+  humanURL: https://docs.numeral.com/api-reference/introduction
+  baseURL: https://api.numeralhq.com
+  tags:
+  - Refunds
+  properties:
+  - type: OpenAPI
+    url: openapi/numeral-refunds-api-openapi.yml
+  - type: Documentation
+    url: https://docs.numeral.com/api-reference/introduction
+  - type: APIReference
+    url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/calculations
+  - type: PostmanCollection
+    url: collections/numeral.postman_collection.json
+  - type: OpenCollection
+    url: collections/numeral.opencollection.json
+  - type: Documentation
+    url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/transactions
+  - type: Documentation
+    url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/products
+- aid: numeral:numeral-tax-calculations-api
+  name: Numeral Tax Calculations API
+  description: The Tax Calculations API from Numeral — 2 operation(s) for tax calculations.
+  humanURL: https://docs.numeral.com/api-reference/introduction
+  baseURL: https://api.numeralhq.com
+  tags:
+  - Tax Calculations
+  properties:
+  - type: OpenAPI
+    url: openapi/numeral-tax-calculations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.numeral.com/api-reference/introduction
+  - type: APIReference
+    url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/calculations
+  - type: PostmanCollection
+    url: collections/numeral.postman_collection.json
+  - type: OpenCollection
+    url: collections/numeral.opencollection.json
+  - type: Documentation
+    url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/transactions
+  - type: Documentation
+    url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/products
+- aid: numeral:numeral-transactions-api
+  name: Numeral Transactions API
+  description: The Transactions API from Numeral — 2 operation(s) for transactions.
+  humanURL: https://docs.numeral.com/api-reference/introduction
+  baseURL: https://api.numeralhq.com
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/numeral-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.numeral.com/api-reference/introduction
+  - type: APIReference
+    url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/calculations
+  - type: PostmanCollection
+    url: collections/numeral.postman_collection.json
+  - type: OpenCollection
+    url: collections/numeral.opencollection.json
+  - type: Documentation
+    url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/transactions
+  - type: Documentation
+    url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/products
 common:
 - type: AgenticAccess
   url: agentic-access/numeral-agentic-access.yml
