@@ -1,0 +1,24 @@
+{
+  "provider": "numeral",
+  "sources": [
+    "numeral-customers-api-openapi.yml",
+    "numeral-health-api-openapi.yml",
+    "numeral-products-api-openapi.yml",
+    "numeral-refunds-api-openapi.yml",
+    "numeral-tax-calculations-api-openapi.yml",
+    "numeral-transactions-api-openapi.yml"
+  ],
+  "outputs": [
+    "numeral-customers-api-openapi.yml",
+    "numeral-health-api-openapi.yml",
+    "numeral-products-api-openapi.yml",
+    "numeral-refunds-api-openapi.yml",
+    "numeral-tax-calculations-api-openapi.yml",
+    "numeral-transactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
