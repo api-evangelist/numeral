@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Numeral Customers Products API",
+    "version": "2026-03-01"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a paginated list of up to 50 products.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.numeralhq.com/tax/products",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor (last product id from the prior page)."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of up to 50 products."
+        },
+        {
+          "info": {
+            "name": "Create and categorize a new product.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.numeralhq.com/tax/products",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create and categorize a new product."
+        },
+        {
+          "info": {
+            "name": "Retrieve a specific product.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.numeralhq.com/tax/products/:reference_product_id",
+            "params": [
+              {
+                "name": "reference_product_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific product."
+        },
+        {
+          "info": {
+            "name": "Delete a specific product.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.numeralhq.com/tax/products/:reference_product_id",
+            "params": [
+              {
+                "name": "reference_product_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a specific product."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

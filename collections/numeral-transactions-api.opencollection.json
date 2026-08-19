@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Numeral Customers Transactions API",
+    "version": "2026-03-01"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Record a completed sale from a prior calculation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.numeralhq.com/tax/transactions",
+            "headers": [
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Record a completed sale from a prior calculation."
+        },
+        {
+          "info": {
+            "name": "Retrieve a specific transaction.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.numeralhq.com/tax/transactions/:transaction_id",
+            "params": [
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific transaction."
+        },
+        {
+          "info": {
+            "name": "Delete a specific transaction.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.numeralhq.com/tax/transactions/:transaction_id",
+            "params": [
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a specific transaction."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Numeral Customers Refunds API",
+    "version": "2026-03-01"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Refunds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve refunds for a specific transaction.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.numeralhq.com/tax/transactions/:transaction_id/refunds",
+            "params": [
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve refunds for a specific transaction."
+        },
+        {
+          "info": {
+            "name": "Add a refund to a transaction.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.numeralhq.com/tax/refunds",
+            "headers": [
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a refund to a transaction."
+        },
+        {
+          "info": {
+            "name": "Reverse a refund you have previously created.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.numeralhq.com/tax/refund_reversals",
+            "headers": [
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reverse a refund you have previously created."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

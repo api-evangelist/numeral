@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Numeral Customers API",
+    "version": "2026-03-01"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new customer and optionally mark as tax exempt.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.numeralhq.com/tax/customers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new customer and optionally mark as tax exempt."
+        },
+        {
+          "info": {
+            "name": "Retrieve a specific customer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.numeralhq.com/tax/customers/:customer_id",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id_type",
+                "value": "",
+                "type": "query",
+                "description": "Whether customer_id is Numeral's id or your reference_customer_id."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific customer."
+        },
+        {
+          "info": {
+            "name": "Delete a specific customer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.numeralhq.com/tax/customers/:customer_id",
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a specific customer."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

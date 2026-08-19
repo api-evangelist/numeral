@@ -1,0 +1,358 @@
+{
+  "item": [
+    {
+      "id": "76075709-7453-49e0-97d1-03013a64ced3",
+      "name": "Refunds",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "54c1e5f7-f4bd-461c-a322-082e616dddc1",
+          "name": "Retrieve refunds for a specific transaction.",
+          "request": {
+            "name": "Retrieve refunds for a specific transaction.",
+            "description": {},
+            "url": {
+              "path": [
+                "tax",
+                "transactions",
+                ":transaction_id",
+                "refunds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transaction_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f8ebba03-f01e-43c8-bf36-f89773028565",
+              "name": "Refunds associated with the transaction.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    "transactions",
+                    ":transaction_id",
+                    "refunds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transaction_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"refunds\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"string\",\n      \"refund_type\": \"string\",\n      \"testmode\": false,\n      \"refund_processed_at\": \"1957-08-11T14:45:57.722Z\",\n      \"line_items\": [\n        {\n          \"reference_product_id\": \"string\",\n          \"amount\": 9885,\n          \"quantity\": 1779,\n          \"product_category\": \"string\"\n        },\n        {\n          \"reference_product_id\": \"string\",\n          \"amount\": 3378,\n          \"quantity\": 4884,\n          \"product_category\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"string\",\n      \"refund_type\": \"string\",\n      \"testmode\": false,\n      \"refund_processed_at\": \"2006-04-05T04:18:31.449Z\",\n      \"line_items\": [\n        {\n          \"reference_product_id\": \"string\",\n          \"amount\": 7058,\n          \"quantity\": 3536,\n          \"product_category\": \"string\"\n        },\n        {\n          \"reference_product_id\": \"string\",\n          \"amount\": 1560,\n          \"quantity\": 692,\n          \"product_category\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ba5c7c8-0d3a-47b4-9d34-9009c3577e16",
+          "name": "Add a refund to a transaction.",
+          "request": {
+            "name": "Add a refund to a transaction.",
+            "description": {},
+            "url": {
+              "path": [
+                "tax",
+                "refunds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "API version. Defaults to 2024-09-01 when omitted.",
+                "key": "X-API-Version",
+                "value": "2024-09-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transaction_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"refund_processed_at\": \"<dateTime>\",\n  \"line_items\": [\n    {\n      \"reference_product_id\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"product_category\": \"<string>\"\n    },\n    {\n      \"reference_product_id\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"product_category\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a08cda53-3f20-4a9f-820c-f484350d63be",
+              "name": "The created refund.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    "refunds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version. Defaults to 2024-09-01 when omitted.",
+                    "key": "X-API-Version",
+                    "value": "2024-09-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transaction_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"refund_processed_at\": \"<dateTime>\",\n  \"line_items\": [\n    {\n      \"reference_product_id\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"product_category\": \"<string>\"\n    },\n    {\n      \"reference_product_id\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"product_category\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"string\",\n  \"refund_type\": \"string\",\n  \"testmode\": false,\n  \"refund_processed_at\": \"1958-10-02T02:46:02.061Z\",\n  \"line_items\": [\n    {\n      \"reference_product_id\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"product_category\": \"<string>\"\n    },\n    {\n      \"reference_product_id\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"product_category\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "958df437-d883-4038-a464-fec571f00027",
+          "name": "Reverse a refund you have previously created.",
+          "request": {
+            "name": "Reverse a refund you have previously created.",
+            "description": {},
+            "url": {
+              "path": [
+                "tax",
+                "refund_reversals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "API version. Defaults to 2024-09-01 when omitted.",
+                "key": "X-API-Version",
+                "value": "2024-09-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refund_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "551c6af4-0da7-427d-8708-acd4ef065965",
+              "name": "The reversed refund.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    "refund_reversals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version. Defaults to 2024-09-01 when omitted.",
+                    "key": "X-API-Version",
+                    "value": "2024-09-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"refund_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"string\",\n  \"refund_type\": \"string\",\n  \"testmode\": false,\n  \"refund_processed_at\": \"1958-10-02T02:46:02.061Z\",\n  \"line_items\": [\n    {\n      \"reference_product_id\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"product_category\": \"<string>\"\n    },\n    {\n      \"reference_product_id\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"product_category\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.numeralhq.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "efe4184d-6451-4b6f-acf7-d1fa1809812b",
+    "name": "Numeral Customers Refunds API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Numeral (Numeral HQ) sales-tax compliance platform. Calculate real-time sales tax by customer location, record transactions and refunds, and manage products and customers. Registrations, nexus monitoring, filing, and remittance are delivered as managed platform services on top of the data captured through this API. Not affiliated with Numeral (numeral.io), an unrelated payment operations company.\n\nContact Support:\n Name: Numeral Support",
+      "type": "text/plain"
+    }
+  }
+}

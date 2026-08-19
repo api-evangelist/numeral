@@ -1,0 +1,261 @@
+{
+  "item": [
+    {
+      "id": "3d3229b1-8b04-4e40-b285-2a812afafc6d",
+      "name": "Tax Calculations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c4f87f59-901f-4491-91ab-7da7f83843b9",
+          "name": "Get tax information for a given product and address or IP.",
+          "request": {
+            "name": "Get tax information for a given product and address or IP.",
+            "description": {},
+            "url": {
+              "path": [
+                "tax",
+                "calculations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "API version. Defaults to 2024-09-01 when omitted.",
+                "key": "X-API-Version",
+                "value": "2024-09-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer\": {\n    \"reference_customer_id\": \"<string>\",\n    \"customer_address\": {\n      \"line_1\": \"<string>\",\n      \"line_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"ip_address\": \"<string>\"\n  },\n  \"origin_address\": {\n    \"line_1\": \"<string>\",\n    \"line_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"order_details\": {\n    \"customer_currency_code\": \"<string>\",\n    \"line_items\": [\n      {\n        \"reference_product_id\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"quantity\": \"<integer>\",\n        \"product_category\": \"<string>\"\n      },\n      {\n        \"reference_product_id\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"quantity\": \"<integer>\",\n        \"product_category\": \"<string>\"\n      }\n    ]\n  },\n  \"metadata\": {\n    \"key_0\": false\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e9b4991a-ab3b-4d26-8b61-fc1c05c2d0ac",
+              "name": "Calculated tax for the supplied order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    "calculations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version. Defaults to 2024-09-01 when omitted.",
+                    "key": "X-API-Version",
+                    "value": "2024-09-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer\": {\n    \"reference_customer_id\": \"<string>\",\n    \"customer_address\": {\n      \"line_1\": \"<string>\",\n      \"line_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"ip_address\": \"<string>\"\n  },\n  \"origin_address\": {\n    \"line_1\": \"<string>\",\n    \"line_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"order_details\": {\n    \"customer_currency_code\": \"<string>\",\n    \"line_items\": [\n      {\n        \"reference_product_id\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"quantity\": \"<integer>\",\n        \"product_category\": \"<string>\"\n      },\n      {\n        \"reference_product_id\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"quantity\": \"<integer>\",\n        \"product_category\": \"<string>\"\n      }\n    ]\n  },\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"string\",\n  \"customer_currency_code\": \"string\",\n  \"line_items\": [\n    {\n      \"reference_product_id\": \"string\",\n      \"tax_amount\": 4474,\n      \"taxable_amount\": 4452\n    },\n    {\n      \"reference_product_id\": \"string\",\n      \"tax_amount\": 2964,\n      \"taxable_amount\": 5678\n    }\n  ],\n  \"total_tax_amount\": 5062,\n  \"total_amount_excluding_tax\": 5526,\n  \"total_amount_including_tax\": 6689,\n  \"expires_at\": \"1948-11-23T08:51:48.731Z\",\n  \"testmode\": false,\n  \"address_resolution_status\": \"string\",\n  \"address_used\": {\n    \"line_1\": \"<string>\",\n    \"line_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d481d472-a1b0-4797-93b4-d3d67f6a9148",
+          "name": "Calculate tax for marketplace / platform transactions on behalf of a merchant.",
+          "request": {
+            "name": "Calculate tax for marketplace / platform transactions on behalf of a merchant.",
+            "description": {},
+            "url": {
+              "path": [
+                "tax",
+                "platform_calculations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "API version. Defaults to 2024-09-01 when omitted.",
+                "key": "X-API-Version",
+                "value": "2024-09-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer\": {\n    \"reference_customer_id\": \"<string>\",\n    \"customer_address\": {\n      \"line_1\": \"<string>\",\n      \"line_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"ip_address\": \"<string>\"\n  },\n  \"origin_address\": {\n    \"line_1\": \"<string>\",\n    \"line_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"order_details\": {\n    \"customer_currency_code\": \"<string>\",\n    \"line_items\": [\n      {\n        \"reference_product_id\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"quantity\": \"<integer>\",\n        \"product_category\": \"<string>\"\n      },\n      {\n        \"reference_product_id\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"quantity\": \"<integer>\",\n        \"product_category\": \"<string>\"\n      }\n    ]\n  },\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": 711.9008448006891,\n    \"key_2\": \"string\",\n    \"key_3\": \"string\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e6e7033a-558f-4371-b94b-2fea2f13511e",
+              "name": "Calculated tax for the platform order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    "platform_calculations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "API version. Defaults to 2024-09-01 when omitted.",
+                    "key": "X-API-Version",
+                    "value": "2024-09-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer\": {\n    \"reference_customer_id\": \"<string>\",\n    \"customer_address\": {\n      \"line_1\": \"<string>\",\n      \"line_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"ip_address\": \"<string>\"\n  },\n  \"origin_address\": {\n    \"line_1\": \"<string>\",\n    \"line_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"order_details\": {\n    \"customer_currency_code\": \"<string>\",\n    \"line_items\": [\n      {\n        \"reference_product_id\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"quantity\": \"<integer>\",\n        \"product_category\": \"<string>\"\n      },\n      {\n        \"reference_product_id\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"quantity\": \"<integer>\",\n        \"product_category\": \"<string>\"\n      }\n    ]\n  },\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"string\",\n  \"customer_currency_code\": \"string\",\n  \"line_items\": [\n    {\n      \"reference_product_id\": \"string\",\n      \"tax_amount\": 190,\n      \"taxable_amount\": 7687\n    },\n    {\n      \"reference_product_id\": \"string\",\n      \"tax_amount\": 445,\n      \"taxable_amount\": 463\n    }\n  ],\n  \"total_tax_amount\": 5830,\n  \"total_amount_excluding_tax\": 8021,\n  \"total_amount_including_tax\": 3399,\n  \"expires_at\": \"2000-05-06T05:34:04.005Z\",\n  \"testmode\": true,\n  \"address_resolution_status\": \"string\",\n  \"address_used\": {\n    \"line_1\": \"<string>\",\n    \"line_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.numeralhq.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7a55217c-7397-4d40-862d-202973b6df12",
+    "name": "Numeral Customers Tax Calculations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Numeral (Numeral HQ) sales-tax compliance platform. Calculate real-time sales tax by customer location, record transactions and refunds, and manage products and customers. Registrations, nexus monitoring, filing, and remittance are delivered as managed platform services on top of the data captured through this API. Not affiliated with Numeral (numeral.io), an unrelated payment operations company.\n\nContact Support:\n Name: Numeral Support",
+      "type": "text/plain"
+    }
+  }
+}

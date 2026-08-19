@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Numeral Customers Tax Calculations API",
+    "version": "2026-03-01"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tax Calculations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get tax information for a given product and address or IP.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.numeralhq.com/tax/calculations",
+            "headers": [
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get tax information for a given product and address or IP."
+        },
+        {
+          "info": {
+            "name": "Calculate tax for marketplace / platform transactions on behalf of a merchant.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.numeralhq.com/tax/platform_calculations",
+            "headers": [
+              {
+                "name": "X-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Calculate tax for marketplace / platform transactions on behalf of a merchant."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
