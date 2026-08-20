@@ -26,6 +26,12 @@ tags:
 - Sales Tax
 - Tax Compliance
 - Tax Calculation
+- E-Commerce
+- Software-as-a-Service
+tags_raw:
+- Sales Tax
+- Tax Compliance
+- Tax Calculation
 - Ecommerce
 - SaaS
 created: '2026-06-21'
@@ -71,6 +77,10 @@ apis:
 - aid: numeral:webhooks
   name: Numeral Webhooks
   tags:
+  - Webhook
+  - Event
+  - Notification
+  tags_raw:
   - Webhooks
   - Events
   - Notifications
@@ -134,6 +144,8 @@ apis:
   humanURL: https://docs.numeral.com/api-reference/introduction
   baseURL: https://api.numeralhq.com
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
@@ -200,6 +212,8 @@ apis:
   humanURL: https://docs.numeral.com/api-reference/introduction
   baseURL: https://api.numeralhq.com
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
