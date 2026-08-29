@@ -8,6 +8,18 @@ description: Numeral (Numeral HQ) is a sales-tax compliance and automation platf
   and refunds, and manages products and customers, while the broader platform handles
   registrations, nexus monitoring, filing, and remittance. Not to be confused with
   Numeral (numeral.io), an unrelated payment-operations company now part of Mambu.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
