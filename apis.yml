@@ -55,6 +55,10 @@ apis:
   name: Numeral Filings API
   tags:
   - Filings
+  - Remittances
+  - Autofile
+  tags_raw:
+  - Filings
   - Remittance
   - Autofile
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
