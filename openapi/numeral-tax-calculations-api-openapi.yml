@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Numeral Customers Tax Calculations API
+  title: Numeral Tax Calculations API
   description: REST API for the Numeral (Numeral HQ) sales-tax compliance platform. Calculate real-time sales tax by customer location, record transactions and refunds, and manage products and customers. Registrations, nexus monitoring, filing, and remittance are delivered as managed platform services on top of the data captured through this API. Not affiliated with Numeral (numeral.io), an unrelated payment operations company.
   termsOfService: https://www.numeral.com/terms
   contact:
@@ -20,7 +20,7 @@ paths:
       operationId: createCalculation
       tags:
       - Tax Calculations
-      summary: Get tax information for a given product and address or IP.
+      summary: Get tax information for a given product and address or IP
       parameters:
       - $ref: '#/components/parameters/ApiVersion'
       requestBody:
@@ -41,7 +41,7 @@ paths:
       operationId: createPlatformCalculation
       tags:
       - Tax Calculations
-      summary: Calculate tax for marketplace / platform transactions on behalf of a merchant.
+      summary: Calculate tax for marketplace / platform transactions on behalf of a merchant
       parameters:
       - $ref: '#/components/parameters/ApiVersion'
       requestBody:
@@ -59,41 +59,6 @@ paths:
                 $ref: '#/components/schemas/CalculationResponse'
 components:
   schemas:
-    CalculationResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        object:
-          type: string
-        customer_currency_code:
-          type: string
-        line_items:
-          type: array
-          items:
-            type: object
-            properties:
-              reference_product_id:
-                type: string
-              tax_amount:
-                type: integer
-              taxable_amount:
-                type: integer
-        total_tax_amount:
-          type: integer
-        total_amount_excluding_tax:
-          type: integer
-        total_amount_including_tax:
-          type: integer
-        expires_at:
-          type: string
-          format: date-time
-        testmode:
-          type: boolean
-        address_resolution_status:
-          type: string
-        address_used:
-          $ref: '#/components/schemas/Address'
     LineItem:
       type: object
       properties:
@@ -147,6 +112,41 @@ components:
           type: string
         country:
           type: string
+    CalculationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        customer_currency_code:
+          type: string
+        line_items:
+          type: array
+          items:
+            type: object
+            properties:
+              reference_product_id:
+                type: string
+              tax_amount:
+                type: integer
+              taxable_amount:
+                type: integer
+        total_tax_amount:
+          type: integer
+        total_amount_excluding_tax:
+          type: integer
+        total_amount_including_tax:
+          type: integer
+        expires_at:
+          type: string
+          format: date-time
+        testmode:
+          type: boolean
+        address_resolution_status:
+          type: string
+        address_used:
+          $ref: '#/components/schemas/Address'
   parameters:
     ApiVersion:
       name: X-API-Version

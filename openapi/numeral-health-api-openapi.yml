@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Numeral Customers Health API
+  title: Numeral Health API
   description: REST API for the Numeral (Numeral HQ) sales-tax compliance platform. Calculate real-time sales tax by customer location, record transactions and refunds, and manage products and customers. Registrations, nexus monitoring, filing, and remittance are delivered as managed platform services on top of the data captured through this API. Not affiliated with Numeral (numeral.io), an unrelated payment operations company.
   termsOfService: https://www.numeral.com/terms
   contact:
@@ -20,7 +20,7 @@ paths:
       operationId: pingHealthCheck
       tags:
       - Health
-      summary: Authenticated health check endpoint.
+      summary: Authenticated health check endpoint
       parameters:
       - $ref: '#/components/parameters/ApiVersion'
       responses:

@@ -1,12 +1,7 @@
 {
   "provider": "numeral",
   "sources": [
-    "numeral-customers-api-openapi.yml",
-    "numeral-health-api-openapi.yml",
-    "numeral-products-api-openapi.yml",
-    "numeral-refunds-api-openapi.yml",
-    "numeral-tax-calculations-api-openapi.yml",
-    "numeral-transactions-api-openapi.yml"
+    "_original/numeral-openapi.yml"
   ],
   "outputs": [
     "numeral-customers-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "numeral-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "numeral-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "numeral-health-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "numeral-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "numeral-refunds-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "numeral-tax-calculations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "numeral-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

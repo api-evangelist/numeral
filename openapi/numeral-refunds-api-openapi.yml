@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Numeral Customers Refunds API
+  title: Numeral Refunds API
   description: REST API for the Numeral (Numeral HQ) sales-tax compliance platform. Calculate real-time sales tax by customer location, record transactions and refunds, and manage products and customers. Registrations, nexus monitoring, filing, and remittance are delivered as managed platform services on top of the data captured through this API. Not affiliated with Numeral (numeral.io), an unrelated payment operations company.
   termsOfService: https://www.numeral.com/terms
   contact:
@@ -20,7 +20,7 @@ paths:
       operationId: getRefundsForTransaction
       tags:
       - Refunds
-      summary: Retrieve refunds for a specific transaction.
+      summary: Retrieve refunds for a specific transaction
       parameters:
       - $ref: '#/components/parameters/TransactionId'
       responses:
@@ -40,7 +40,7 @@ paths:
       operationId: createRefund
       tags:
       - Refunds
-      summary: Add a refund to a transaction.
+      summary: Add a refund to a transaction
       parameters:
       - $ref: '#/components/parameters/ApiVersion'
       requestBody:
@@ -61,7 +61,7 @@ paths:
       operationId: createRefundReversal
       tags:
       - Refunds
-      summary: Reverse a refund you have previously created.
+      summary: Reverse a refund you have previously created
       parameters:
       - $ref: '#/components/parameters/ApiVersion'
       requestBody:
@@ -97,6 +97,22 @@ components:
           type: integer
         product_category:
           type: string
+    RefundRequest:
+      type: object
+      required:
+      - transaction_id
+      properties:
+        transaction_id:
+          type: string
+        type:
+          type: string
+        refund_processed_at:
+          type: string
+          format: date-time
+        line_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
     RefundResponse:
       type: object
       properties:
@@ -115,29 +131,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LineItem'
-    RefundRequest:
-      type: object
-      required:
-      - transaction_id
-      properties:
-        transaction_id:
-          type: string
-        type:
-          type: string
-        refund_processed_at:
-          type: string
-          format: date-time
-        line_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/LineItem'
   parameters:
-    TransactionId:
-      name: transaction_id
-      in: path
-      required: true
-      schema:
-        type: string
     ApiVersion:
       name: X-API-Version
       in: header
@@ -151,6 +145,12 @@ components:
         - '2024-09-01'
         default: '2024-09-01'
       description: API version. Defaults to 2024-09-01 when omitted.
+    TransactionId:
+      name: transaction_id
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
