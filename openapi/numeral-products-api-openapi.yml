@@ -101,26 +101,6 @@ paths:
                 $ref: '#/components/schemas/DeletedResource'
 components:
   schemas:
-    DeletedResource:
-      type: object
-      properties:
-        object:
-          type: string
-        deleted_at:
-          type: string
-          format: date-time
-    ProductRequest:
-      type: object
-      required:
-      - reference_product_id
-      properties:
-        reference_product_id:
-          type: string
-        reference_product_name:
-          type: string
-        product_category:
-          type: string
-          description: Tax-code product category that drives taxability.
     ProductResponse:
       type: object
       properties:
@@ -140,6 +120,26 @@ components:
           format: date-time
         testmode:
           type: boolean
+    ProductRequest:
+      type: object
+      required:
+      - reference_product_id
+      properties:
+        reference_product_id:
+          type: string
+        reference_product_name:
+          type: string
+        product_category:
+          type: string
+          description: Tax-code product category that drives taxability.
+    DeletedResource:
+      type: object
+      properties:
+        object:
+          type: string
+        deleted_at:
+          type: string
+          format: date-time
   securitySchemes:
     bearerAuth:
       type: http

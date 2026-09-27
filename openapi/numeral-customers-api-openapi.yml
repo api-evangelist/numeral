@@ -82,6 +82,21 @@ paths:
                 $ref: '#/components/schemas/DeletedResource'
 components:
   schemas:
+    CustomerResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        reference_customer_id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        is_tax_exempt:
+          type: boolean
     CustomerRequest:
       type: object
       properties:
@@ -101,21 +116,6 @@ components:
         deleted_at:
           type: string
           format: date-time
-    CustomerResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        object:
-          type: string
-        reference_customer_id:
-          type: string
-        name:
-          type: string
-        email:
-          type: string
-        is_tax_exempt:
-          type: boolean
   securitySchemes:
     bearerAuth:
       type: http

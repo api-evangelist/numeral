@@ -97,21 +97,6 @@ components:
         metadata:
           type: object
           additionalProperties: true
-    Address:
-      type: object
-      properties:
-        line_1:
-          type: string
-        line_2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        postal_code:
-          type: string
-        country:
-          type: string
     CalculationResponse:
       type: object
       properties:
@@ -147,6 +132,21 @@ components:
           type: string
         address_used:
           $ref: '#/components/schemas/Address'
+    Address:
+      type: object
+      properties:
+        line_1:
+          type: string
+        line_2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+        country:
+          type: string
   parameters:
     ApiVersion:
       name: X-API-Version
