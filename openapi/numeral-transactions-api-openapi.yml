@@ -67,12 +67,6 @@ paths:
                 $ref: '#/components/schemas/DeletedResource'
 components:
   parameters:
-    TransactionId:
-      name: transaction_id
-      in: path
-      required: true
-      schema:
-        type: string
     ApiVersion:
       name: X-API-Version
       in: header
@@ -86,22 +80,13 @@ components:
         - '2024-09-01'
         default: '2024-09-01'
       description: API version. Defaults to 2024-09-01 when omitted.
+    TransactionId:
+      name: transaction_id
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
-    TransactionRequest:
-      type: object
-      required:
-      - calculation_id
-      properties:
-        calculation_id:
-          type: string
-        reference_order_id:
-          type: string
-        transaction_processed_at:
-          type: string
-          format: date-time
-        metadata:
-          type: object
-          additionalProperties: true
     TransactionResponse:
       type: object
       properties:
@@ -126,6 +111,29 @@ components:
         metadata:
           type: object
           additionalProperties: true
+    TransactionRequest:
+      type: object
+      required:
+      - calculation_id
+      properties:
+        calculation_id:
+          type: string
+        reference_order_id:
+          type: string
+        transaction_processed_at:
+          type: string
+          format: date-time
+        metadata:
+          type: object
+          additionalProperties: true
+    DeletedResource:
+      type: object
+      properties:
+        object:
+          type: string
+        deleted_at:
+          type: string
+          format: date-time
     LineItem:
       type: object
       properties:
@@ -138,14 +146,6 @@ components:
           type: integer
         product_category:
           type: string
-    DeletedResource:
-      type: object
-      properties:
-        object:
-          type: string
-        deleted_at:
-          type: string
-          format: date-time
   securitySchemes:
     bearerAuth:
       type: http

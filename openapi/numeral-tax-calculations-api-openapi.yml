@@ -59,44 +59,6 @@ paths:
                 $ref: '#/components/schemas/CalculationResponse'
 components:
   schemas:
-    LineItem:
-      type: object
-      properties:
-        reference_product_id:
-          type: string
-        amount:
-          type: integer
-          description: Line amount in the smallest currency unit (e.g., cents).
-        quantity:
-          type: integer
-        product_category:
-          type: string
-    CalculationRequest:
-      type: object
-      properties:
-        customer:
-          type: object
-          properties:
-            reference_customer_id:
-              type: string
-            customer_address:
-              $ref: '#/components/schemas/Address'
-            ip_address:
-              type: string
-        origin_address:
-          $ref: '#/components/schemas/Address'
-        order_details:
-          type: object
-          properties:
-            customer_currency_code:
-              type: string
-            line_items:
-              type: array
-              items:
-                $ref: '#/components/schemas/LineItem'
-        metadata:
-          type: object
-          additionalProperties: true
     CalculationResponse:
       type: object
       properties:
@@ -132,6 +94,32 @@ components:
           type: string
         address_used:
           $ref: '#/components/schemas/Address'
+    CalculationRequest:
+      type: object
+      properties:
+        customer:
+          type: object
+          properties:
+            reference_customer_id:
+              type: string
+            customer_address:
+              $ref: '#/components/schemas/Address'
+            ip_address:
+              type: string
+        origin_address:
+          $ref: '#/components/schemas/Address'
+        order_details:
+          type: object
+          properties:
+            customer_currency_code:
+              type: string
+            line_items:
+              type: array
+              items:
+                $ref: '#/components/schemas/LineItem'
+        metadata:
+          type: object
+          additionalProperties: true
     Address:
       type: object
       properties:
@@ -146,6 +134,18 @@ components:
         postal_code:
           type: string
         country:
+          type: string
+    LineItem:
+      type: object
+      properties:
+        reference_product_id:
+          type: string
+        amount:
+          type: integer
+          description: Line amount in the smallest currency unit (e.g., cents).
+        quantity:
+          type: integer
+        product_category:
           type: string
   parameters:
     ApiVersion:
