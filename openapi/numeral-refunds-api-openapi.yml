@@ -84,43 +84,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RefundResponse'
 components:
-  parameters:
-    ApiVersion:
-      name: X-API-Version
-      in: header
-      required: false
-      schema:
-        type: string
-        enum:
-        - '2026-03-01'
-        - '2026-01-01'
-        - '2025-05-12'
-        - '2024-09-01'
-        default: '2024-09-01'
-      description: API version. Defaults to 2024-09-01 when omitted.
-    TransactionId:
-      name: transaction_id
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    RefundRequest:
-      type: object
-      required:
-      - transaction_id
-      properties:
-        transaction_id:
-          type: string
-        type:
-          type: string
-        refund_processed_at:
-          type: string
-          format: date-time
-        line_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/LineItem'
     RefundResponse:
       type: object
       properties:
@@ -151,6 +115,42 @@ components:
           type: integer
         product_category:
           type: string
+    RefundRequest:
+      type: object
+      required:
+      - transaction_id
+      properties:
+        transaction_id:
+          type: string
+        type:
+          type: string
+        refund_processed_at:
+          type: string
+          format: date-time
+        line_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+  parameters:
+    TransactionId:
+      name: transaction_id
+      in: path
+      required: true
+      schema:
+        type: string
+    ApiVersion:
+      name: X-API-Version
+      in: header
+      required: false
+      schema:
+        type: string
+        enum:
+        - '2026-03-01'
+        - '2026-01-01'
+        - '2025-05-12'
+        - '2024-09-01'
+        default: '2024-09-01'
+      description: API version. Defaults to 2024-09-01 when omitted.
   securitySchemes:
     bearerAuth:
       type: http

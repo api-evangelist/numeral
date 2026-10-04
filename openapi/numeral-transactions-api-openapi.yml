@@ -66,51 +66,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeletedResource'
 components:
-  parameters:
-    ApiVersion:
-      name: X-API-Version
-      in: header
-      required: false
-      schema:
-        type: string
-        enum:
-        - '2026-03-01'
-        - '2026-01-01'
-        - '2025-05-12'
-        - '2024-09-01'
-        default: '2024-09-01'
-      description: API version. Defaults to 2024-09-01 when omitted.
-    TransactionId:
-      name: transaction_id
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    TransactionResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        object:
-          type: string
-        calculation_id:
-          type: string
-        reference_order_id:
-          type: string
-        customer_currency_code:
-          type: string
-        filing_currency_code:
-          type: string
-        line_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/LineItem'
-        testmode:
-          type: boolean
-        metadata:
-          type: object
-          additionalProperties: true
     TransactionRequest:
       type: object
       required:
@@ -146,6 +102,50 @@ components:
           type: integer
         product_category:
           type: string
+    TransactionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        calculation_id:
+          type: string
+        reference_order_id:
+          type: string
+        customer_currency_code:
+          type: string
+        filing_currency_code:
+          type: string
+        line_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+        testmode:
+          type: boolean
+        metadata:
+          type: object
+          additionalProperties: true
+  parameters:
+    TransactionId:
+      name: transaction_id
+      in: path
+      required: true
+      schema:
+        type: string
+    ApiVersion:
+      name: X-API-Version
+      in: header
+      required: false
+      schema:
+        type: string
+        enum:
+        - '2026-03-01'
+        - '2026-01-01'
+        - '2025-05-12'
+        - '2024-09-01'
+        default: '2024-09-01'
+      description: API version. Defaults to 2024-09-01 when omitted.
   securitySchemes:
     bearerAuth:
       type: http
