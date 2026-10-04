@@ -1,0 +1,54 @@
+slug: numeral
+provider: Numeral
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Tax Calculations
+  spec_file: numeral-tax-calculations-api-openapi.yml
+  capability_id: BC-220.20
+  capability_id_l1: BC-220
+  capability_name: Indirect Tax Management
+  confidence: 0.95
+  evidence: POST /tax/calculations — Get tax information for a given product and address or IP
+  reason: Explicit real-time sales-tax calculation by jurisdiction, which is indirect tax (sales tax)
+    management.
+- tag: Transactions
+  spec_file: numeral-transactions-api-openapi.yml
+  capability_id: BC-220.20
+  capability_id_l1: BC-220
+  capability_name: Indirect Tax Management
+  confidence: 0.75
+  evidence: POST /tax/transactions — Record a completed sale from a prior calculation
+  reason: Records completed sales against prior tax calculations to build the sales-tax liability record
+    — indirect tax management; could also touch tax reporting but recording of taxable transactions fits
+    sales-tax handling.
+- tag: Customers
+  spec_file: numeral-customers-api-openapi.yml
+  capability_id: BC-220.20
+  capability_id_l1: BC-220
+  capability_name: Indirect Tax Management
+  confidence: 0.7
+  evidence: POST /tax/customers — Create a new customer and optionally mark as tax exempt
+  reason: Although the tag is 'Customers', the operations maintain customer records for sales-tax exemption
+    purposes within a sales-tax compliance platform, which supports indirect tax (sales tax) management
+    rather than CRM customer master data.
+- tag: Refunds
+  spec_file: numeral-refunds-api-openapi.yml
+  capability_id: BC-220.20
+  capability_id_l1: BC-220
+  capability_name: Indirect Tax Management
+  confidence: 0.7
+  evidence: POST /tax/refunds — Add a refund to a transaction; POST /tax/refund_reversals — Reverse a
+    refund you have previously created
+  reason: Refunds are recorded against tax transactions to adjust sales-tax liability, part of indirect
+    (sales) tax management, not payment refund processing.

@@ -41,12 +41,14 @@ tags:
 - Tax Calculation
 - E-Commerce
 - Software-as-a-Service
+- Tax
 tags_raw:
 - Sales Tax
 - Tax Compliance
 - Tax Calculation
 - Ecommerce
 - SaaS
+- Tax
 created: '2026-06-21'
 modified: '2026-06-21'
 specificationVersion: '0.23'
@@ -248,6 +250,9 @@ apis:
   - type: Documentation
     url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/products
 common:
+- type: CapabilityMap
+  url: capabilities/numeral-capability-edges.yml
+  name: Numeral Business Capability Map
 - type: AgenticAccess
   url: agentic-access/numeral-agentic-access.yml
 - type: DomainSecurity
