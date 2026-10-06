@@ -50,7 +50,7 @@ tags_raw:
 - SaaS
 - Tax
 created: '2026-06-21'
-modified: '2026-06-21'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: numeral:filings
@@ -250,6 +250,8 @@ apis:
   - type: Documentation
     url: https://docs.numeral.com/api-reference/v2026-03-01/endpoint/products
 common:
+- url: https://www.numeral.com/blog
+  type: Blog
 - type: CapabilityMap
   url: capabilities/numeral-capability-edges.yml
   name: Numeral Business Capability Map
