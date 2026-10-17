@@ -58,19 +58,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/CalculationResponse'
 components:
+  parameters:
+    ApiVersion:
+      name: X-API-Version
+      in: header
+      required: false
+      schema:
+        type: string
+        enum:
+        - '2026-03-01'
+        - '2026-01-01'
+        - '2025-05-12'
+        - '2024-09-01'
+        default: '2024-09-01'
+      description: API version. Defaults to 2024-09-01 when omitted.
   schemas:
-    LineItem:
-      type: object
-      properties:
-        reference_product_id:
-          type: string
-        amount:
-          type: integer
-          description: Line amount in the smallest currency unit (e.g., cents).
-        quantity:
-          type: integer
-        product_category:
-          type: string
     CalculationResponse:
       type: object
       properties:
@@ -121,6 +123,18 @@ components:
           type: string
         country:
           type: string
+    LineItem:
+      type: object
+      properties:
+        reference_product_id:
+          type: string
+        amount:
+          type: integer
+          description: Line amount in the smallest currency unit (e.g., cents).
+        quantity:
+          type: integer
+        product_category:
+          type: string
     CalculationRequest:
       type: object
       properties:
@@ -147,20 +161,6 @@ components:
         metadata:
           type: object
           additionalProperties: true
-  parameters:
-    ApiVersion:
-      name: X-API-Version
-      in: header
-      required: false
-      schema:
-        type: string
-        enum:
-        - '2026-03-01'
-        - '2026-01-01'
-        - '2025-05-12'
-        - '2024-09-01'
-        default: '2024-09-01'
-      description: API version. Defaults to 2024-09-01 when omitted.
   securitySchemes:
     bearerAuth:
       type: http

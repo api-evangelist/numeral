@@ -90,17 +90,6 @@ components:
         deleted_at:
           type: string
           format: date-time
-    CustomerRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        email:
-          type: string
-        is_tax_exempt:
-          type: boolean
-        reference_customer_id:
-          type: string
     CustomerResponse:
       type: object
       properties:
@@ -116,6 +105,17 @@ components:
           type: string
         is_tax_exempt:
           type: boolean
+    CustomerRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        is_tax_exempt:
+          type: boolean
+        reference_customer_id:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http
