@@ -6,6 +6,7 @@ source:
 - https://composio.dev/toolkits/numeral
 - https://monid.ai/tools/numeral
 checked:
+- chargebee/integrations/chargebee-integration-edges.yml
 - https://composio.dev/toolkits/numeral
 - https://monid.ai/tools/numeral
 - https://n8n.io/integrations/numeral/
@@ -14,6 +15,23 @@ checked:
 summary: null
 marketplace_apps: []
 edges:
+- partner_name: Chargebee (own)
+  partner: chargebee
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.chargebee.com/apps/['numeral']
+  mirror_of: chargebee/integrations/chargebee-integration-edges.yml
+  apps:
+  - Numeral
+  listing_count: 1
+  detected: '2026-10-19'
+  detected_by: mirror-platform-listings.py
+  category: Tax Management
 - partner_name: Stripe (own)
   partner: stripe
   partner_match: mirror
