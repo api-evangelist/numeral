@@ -1,4 +1,4 @@
-# Numeral (numeral)
+# Numeral
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,148 +66,129 @@
 
 Numeral (Numeral HQ) is a sales-tax compliance and automation platform for ecommerce and SaaS companies. Its REST API calculates real-time sales tax by customer location at state, county, city, and district granularity, records transactions and refunds, and manages products and customers, while the broader platform handles registrations, nexus monitoring, filing, and remittance. Not to be confused with Numeral (numeral.io), an unrelated payment-operations company now part of Mambu.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/numeral/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/numeral/refs/heads/main/apis.yml)
+**Areas:** Sales Tax · Tax Compliance · Tax Calculation · E-Commerce · Software-as-a-Service · Tax
 
-## Tags
+## Numeral on APIs.io
 
-- Sales Tax
-- Tax Compliance
-- Tax Calculation
-- Ecommerce
-- SaaS
+Everything profiled for Numeral is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/numeral/](https://apis.io/providers/numeral/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (9)
 
-- **Created:** 2026-06-21
-- **Modified:** 2026-06-21
+- [Numeral Filings API](https://apis.io/apis/numeral/filings/) — Sales-tax return filing and remittance (Autofile) across all US states, driven by recorded transactions. Filing and remittance are delivered as managed…
+- [Numeral Registrations & Nexus API](https://apis.io/apis/numeral/registrations-nexus/) — State sales-tax registration (Autoregister) and physical/economic nexus monitoring with state-crossing alerts. Provided as managed platform services on top…
+- [Numeral Webhooks](https://apis.io/apis/numeral/webhooks/) — Event notifications for compliance and transaction lifecycle changes (e.g., filing, registration, and nexus events). Webhook delivery is offered through the…
+- [Numeral Customers API](https://apis.io/apis/numeral/numeral-customers-api/) — The Customers API from Numeral — 2 operation(s) for customers.
+- [Numeral Health API](https://apis.io/apis/numeral/numeral-health-api/) — The Health API from Numeral — 1 operation(s) for health.
+- [Numeral Products API](https://apis.io/apis/numeral/numeral-products-api/) — The Products API from Numeral — 2 operation(s) for products.
+- [Numeral Refunds API](https://apis.io/apis/numeral/numeral-refunds-api/) — The Refunds API from Numeral — 3 operation(s) for refunds.
+- [Numeral Tax Calculations API](https://apis.io/apis/numeral/numeral-tax-calculations-api/) — The Tax Calculations API from Numeral — 2 operation(s) for tax calculations.
+- [Numeral Transactions API](https://apis.io/apis/numeral/numeral-transactions-api/) — The Transactions API from Numeral — 2 operation(s) for transactions.
 
-## APIs
+### Published properties
 
-### Numeral Tax Calculations API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Calculates real-time sales tax for a given product, customer, and address or IP at state, county, city, and district granularity, returning per-line-item and total tax amounts. Includes platform/marketplace calculations.
+#### Agentic access (1)
 
-- **Human URL:** [https://docs.numeral.com/api-reference/introduction](https://docs.numeral.com/api-reference/introduction)
-- **Base URL:** `https://api.numeralhq.com`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Numeral Agentic Access](https://apis.io/agentic-access/numeral/numeral-agentic-access/)
 
-- Tax Calculation
-- Sales Tax
-- Rates
+#### Collections (7)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://docs.numeral.com/api-reference/introduction)
-- [API Reference](https://docs.numeral.com/api-reference/v2026-03-01/endpoint/calculations)
-- [OpenAPI](openapi/numeral-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/numeral.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/numeral.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Numeral API](https://apis.io/collections/numeral/open-numeral/)
+- [Numeral Customers API](https://apis.io/collections/numeral/open-numeral-customers-api/)
+- [Numeral Customers Health API](https://apis.io/collections/numeral/open-numeral-health-api/)
+- [Numeral Customers Products API](https://apis.io/collections/numeral/open-numeral-products-api/)
+- [Numeral Customers Refunds API](https://apis.io/collections/numeral/open-numeral-refunds-api/)
+- [Numeral Customers Tax Calculations API](https://apis.io/collections/numeral/open-numeral-tax-calculations-api/)
+- [Numeral Customers Transactions API](https://apis.io/collections/numeral/open-numeral-transactions-api/)
 
-### Numeral Transactions API
+#### Security (2)
 
-Records completed sales against a prior calculation, retrieves and deletes transactions, and manages refunds and refund reversals that feed downstream filing and remittance.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://docs.numeral.com/api-reference/v2026-03-01/endpoint/transactions](https://docs.numeral.com/api-reference/v2026-03-01/endpoint/transactions)
-- **Base URL:** `https://api.numeralhq.com`
+- [Numeral Authentication](https://apis.io/security/numeral/numeral-authentication/)
+- [Numeral Domain Security](https://apis.io/security/numeral/numeral-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Transactions
-- Sales
-- Refunds
+Published plans, tiers and prices.
 
-#### Properties
+- [Numeral Plans Pricing](https://apis.io/plans/numeral/numeral-plans-pricing/)
 
-- [Documentation](https://docs.numeral.com/api-reference/v2026-03-01/endpoint/transactions)
-- [OpenAPI](openapi/numeral-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/numeral.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/numeral.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### Numeral Filings API
+Published request limits.
 
-Sales-tax return filing and remittance (Autofile) across all US states, driven by recorded transactions. Filing and remittance are delivered as managed platform services rather than self-serve public REST endpoints; transaction data captured via the API flows into them.
+- [Numeral Rate Limits](https://apis.io/rate-limits/numeral/numeral-rate-limits/)
 
-- **Human URL:** [https://www.numeral.com/product/api](https://www.numeral.com/product/api)
-- **Base URL:** `https://api.numeralhq.com`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Filings
-- Remittance
-- Autofile
+- [Numeral Finops](https://apis.io/finops/numeral/numeral-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://docs.numeral.com/api-reference/introduction)
-- [Plans](https://www.numeral.com/pricing)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Numeral Registrations & Nexus API
-
-State sales-tax registration (Autoregister) and physical/economic nexus monitoring with state-crossing alerts. Provided as managed platform services on top of API-captured transaction data rather than as self-serve public REST endpoints.
-
-- **Human URL:** [https://www.numeral.com/product/api](https://www.numeral.com/product/api)
-- **Base URL:** `https://api.numeralhq.com`
-
-#### Tags
-
-- Registrations
-- Nexus
-- Monitoring
-
-#### Properties
-
-- [Documentation](https://docs.numeral.com/api-reference/introduction)
-- [Plans](https://www.numeral.com/pricing)
-
-### Numeral Products & Tax Codes API
-
-Creates, categorizes, lists, and deletes products and maps them to tax-code product categories that drive correct taxability, plus customer records with tax-exemption status.
-
-- **Human URL:** [https://docs.numeral.com/api-reference/v2026-03-01/endpoint/products](https://docs.numeral.com/api-reference/v2026-03-01/endpoint/products)
-- **Base URL:** `https://api.numeralhq.com`
-
-#### Tags
-
-- Products
-- Tax Codes
-- Classification
-
-#### Properties
-
-- [Documentation](https://docs.numeral.com/api-reference/v2026-03-01/endpoint/products)
-- [OpenAPI](openapi/numeral-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/numeral.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/numeral.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Numeral Webhooks
-
-Event notifications for compliance and transaction lifecycle changes (e.g., filing, registration, and nexus events). Webhook delivery is offered through the Numeral platform; no public webhook subscription endpoint is documented in the REST API reference as of this writing (see review.yml).
-
-- **Human URL:** [https://docs.numeral.com/api-reference/introduction](https://docs.numeral.com/api-reference/introduction)
-- **Base URL:** `https://api.numeralhq.com`
-
-#### Tags
-
-- Webhooks
-- Events
-- Notifications
-
-#### Properties
-
-- [Documentation](https://docs.numeral.com/api-reference/introduction)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/numeralhq)
-- [LinkedIn](https://www.linkedin.com/company/numeralhq)
 - [Website](https://www.numeral.com/)
 - [Documentation](https://docs.numeral.com/api-reference/introduction)
-- [Plans](plans/numeral-plans-pricing.yml)
-- [Rate Limits](rate-limits/numeral-rate-limits.yml)
-- [Fin Ops](finops/numeral-finops.yml)
+- [Blog](https://www.numeral.com/blog)
+- [GitHub](https://github.com/numeralhq)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 25.5** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 44.1 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 7.9 |
+
+**Agent readiness 19.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/numeral/](https://apis.io/providers/numeral/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Numeral: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/numeral/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
